@@ -1,0 +1,14 @@
+/* 1. Import the font from Google Fonts at the absolute top of the file */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+HK:wght@100..900&display=swap');
+
+/* 2. Import Tailwind CSS v4 */
+@import 'tailwindcss';
+
+/* 3. Configure the v4 theme */
+@theme {
+  /* This updates the `font-sans` utility class */
+  --font-sans: 'Noto Sans HK', sans-serif;
+
+  /* This applies it as the default font globally across your app */
+  --default-font-family: var(--font-sans);
+}
