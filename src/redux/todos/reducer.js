@@ -26,7 +26,7 @@ export default function reducer(state = initialState, action) {
     case ADDED:
       return [
         ...state,
-        {...action.payload.text, id: crypto.randomUUID(), complete: false},
+        {text: action.payload.text, id: crypto.randomUUID(), complete: false},
       ];
     case TOGGLED:
       return state.map((todo) => {
