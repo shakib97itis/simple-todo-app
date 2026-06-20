@@ -12,7 +12,12 @@ const initialState = [
     id: crypto.randomUUID(),
     text: 'Learn React',
     complete: false,
-    // color: '', (optional)
+  },
+  {
+    id: crypto.randomUUID(),
+    text: 'Learn React',
+    complete: true,
+    color: 'red',
   },
 ];
 
