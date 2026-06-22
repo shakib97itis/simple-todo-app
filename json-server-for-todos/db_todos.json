@@ -4,7 +4,7 @@
       "id": 1,
       "text": "Learn Vanilla JavaScript",
       "completed": true,
-      "color": "yellow"
+      "color": "green"
     },
     {
       "id": 2,
@@ -22,7 +22,7 @@
       "text": "Learn Redux Basics",
       "completed": true,
       "id": 4,
-      "color": "red"
+      "color": "yellow"
     },
     {
       "text": "Learn Redux fundamentals",
@@ -49,6 +49,41 @@
       "text": "hdjhdjhdjsdh",
       "completed": false,
       "id": 9
+    },
+    {
+      "text": "aaaassssssssssss",
+      "completed": false,
+      "id": 10
+    },
+    {
+      "text": "Hello",
+      "completed": false,
+      "id": 11
+    },
+    {
+      "text": "Hello",
+      "completed": false,
+      "id": 12
+    },
+    {
+      "text": "Hello",
+      "completed": true,
+      "id": 13
+    },
+    {
+      "text": "Hello",
+      "completed": false,
+      "id": 14
+    },
+    {
+      "text": "Hello",
+      "completed": false,
+      "id": 15
+    },
+    {
+      "text": "Hell",
+      "completed": false,
+      "id": 16
     }
   ]
 }

@@ -1,78 +1,79 @@
 import {useDispatch, useSelector} from 'react-redux';
 import {colorChanged, statusChanged} from '../redux/filters/actions';
 
-function formatNumberOfTodos(numOfTodos) {
-  switch (numOfTodos) {
+const numberOfTodos = (no_of_todos) => {
+  switch (no_of_todos) {
     case 0:
       return 'No task';
     case 1:
       return '1 task';
     default:
-      return `${numOfTodos} tasks`;
+      return `${no_of_todos} tasks`;
   }
-}
+};
 
 export default function Footer() {
+  const todos = useSelector((state) => state.todos);
+  const filters = useSelector((state) => state.filters);
+
   const dispatch = useDispatch();
+  const todosRemaining = todos.filter((todo) => !todo.completed).length;
+  const {status, colors} = filters;
 
-  const numOfTodos = useSelector(
-    (state) => state.todos.filter((todo) => !todo.complete).length,
-  );
-
-  const {status, colors} = useSelector((state) => state.filters);
-
-  // console.log(status, colors);
-
-  const handleStatusChange = (newStatus) => {
-    // !We can validate status here.
-    dispatch(statusChanged(newStatus));
+  const handleStatusChange = (status) => {
+    dispatch(statusChanged(status));
   };
 
   const handleColorChange = (color) => {
-    // !We can validate color here.
     if (colors.includes(color)) {
-      dispatch(colorChanged(color, 'remove'));
+      dispatch(colorChanged(color, 'removed'));
     } else {
-      dispatch(colorChanged(color, 'add'));
+      dispatch(colorChanged(color, 'added'));
     }
   };
 
   return (
     <div className="mt-4 flex justify-between text-xs text-gray-500">
-      <p>{formatNumberOfTodos(numOfTodos)} left</p>
+      <p>{numberOfTodos(todosRemaining)} left</p>
       <ul className="flex space-x-1 items-center text-xs">
         <li
-          className={`cursor-pointer ${status === 'all' && 'font-bold'}`}
-          onClick={() => handleStatusChange('all')}
+          className={`cursor-pointer ${status === 'All' && 'font-bold'}`}
+          onClick={() => handleStatusChange('All')}
         >
           All
         </li>
         <li>|</li>
         <li
-          className={`cursor-pointer ${status === 'incomplete' && 'font-bold'}`}
-          onClick={() => handleStatusChange('incomplete')}
+          className={`cursor-pointer ${status === 'Incomplete' && 'font-bold'}`}
+          onClick={() => handleStatusChange('Incomplete')}
         >
           Incomplete
         </li>
         <li>|</li>
         <li
-          className={`cursor-pointer ${status === 'complete' && 'font-bold'}`}
-          onClick={() => handleStatusChange('complete')}
+          className={`cursor-pointer ${status === 'Complete' && 'font-bold'}`}
+          onClick={() => handleStatusChange('Complete')}
         >
           Complete
         </li>
         <li></li>
         <li></li>
         <li
-          className={`h-3 w-3 border-2 border-green-500 md:hover:bg-green-500 rounded-full cursor-pointer ${colors.includes('green') && 'bg-green-500'}`}
+          className={`h-3 w-3 border-2 border-green-500 md:hover:bg-green-500 rounded-full cursor-pointer ${
+            colors.includes('green') && 'bg-green-500'
+          }`}
           onClick={() => handleColorChange('green')}
         ></li>
         <li
-          className={`h-3 w-3 border-2 border-red-500 md:hover:bg-red-500 rounded-full cursor-pointer ${colors.includes('red') && 'bg-red-500'}`}
+          className={`h-3 w-3 border-2 border-red-500 md:hover:bg-red-500 rounded-full cursor-pointer ${
+            colors.includes('red') && 'bg-red-500'
+          }`}
           onClick={() => handleColorChange('red')}
         ></li>
         <li
-          className={`h-3 w-3 border-2 border-blue-500 md:hover:bg-blue-500 rounded-full cursor-pointer ${colors.includes('yellow') && 'bg-blue-500'}`}
+          className={`h-3 w-3 border-2 border-yellow-500 md:hover:bg-yellow-500 rounded-full cursor-pointer ${
+            colors.includes('yellow') && 'bg-yellow-500'
+          }`}
           onClick={() => handleColorChange('yellow')}
         ></li>
       </ul>

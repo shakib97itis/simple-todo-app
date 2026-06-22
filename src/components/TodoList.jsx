@@ -1,41 +1,47 @@
-import {useDispatch, useSelector} from 'react-redux';
-import TodoItem from './TodoItem';
 import {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import fetchTodos from '../redux/todos/thunk/fetchTodos';
+import Todo from './Todo';
 
 export default function TodoList() {
+  const todos = useSelector((state) => state.todos);
+  const filters = useSelector((state) => state.filters);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchTodos);
   }, [dispatch]);
 
-  const todos = useSelector((state) => state.todos);
-  const {status, colors} = useSelector((state) => state.filters);
+  const filterByStatus = (todo) => {
+    const {status} = filters;
+    switch (status) {
+      case 'Complete':
+        return todo.completed;
 
-  const filteredTodos = todos
-    .filter((todo) => {
-      switch (status) {
-        case 'complete':
-          return todo.complete;
-        case 'incomplete':
-          return !todo.complete;
-        default:
-          return true;
-      }
-    })
-    .filter((todo) => {
-      if (colors.length > 0) {
-        return colors.includes(todo?.color);
-      }
-      return true;
-    });
+      case 'Incomplete':
+        return !todo.completed;
+
+      default:
+        return true;
+    }
+  };
+
+  const filterByColors = (todo) => {
+    const {colors} = filters;
+    if (colors.length > 0) {
+      return colors.includes(todo?.color);
+    }
+    return true;
+  };
 
   return (
     <div className="mt-2 text-gray-700 text-sm max-h-75 overflow-y-auto">
-      {filteredTodos.map((todo) => (
-        <TodoItem key={todo.id} todo={todo} />
-      ))}
+      {todos
+        .filter(filterByStatus)
+        .filter(filterByColors)
+        .map((todo) => (
+          <Todo todo={todo} key={todo.id} />
+        ))}
     </div>
   );
 }
