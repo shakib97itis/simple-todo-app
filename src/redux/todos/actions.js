@@ -5,7 +5,17 @@ import {
   DELETED,
   ALL_COMPLETED,
   CLEAR_COMPLETED,
+  LOADED,
 } from './actionTypes';
+
+export function loaded(todos) {
+  return {
+    type: LOADED,
+    payload: {
+      todos,
+    },
+  };
+}
 
 export function added(text) {
   return {

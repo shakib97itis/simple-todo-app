@@ -5,24 +5,15 @@ import {
   DELETED,
   ALL_COMPLETED,
   CLEAR_COMPLETED,
+  LOADED,
 } from './actionTypes';
 
-const initialState = [
-  {
-    id: crypto.randomUUID(),
-    text: 'Learn React',
-    complete: false,
-  },
-  {
-    id: crypto.randomUUID(),
-    text: 'Learn React',
-    complete: true,
-    color: 'red',
-  },
-];
+const initialState = [];
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+    case LOADED:
+      return [...state, ...action.payload.todos];
     case ADDED:
       return [
         ...state,
