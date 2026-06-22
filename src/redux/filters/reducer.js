@@ -2,7 +2,7 @@ import {COLOR_CHANGED, STATUS_CHANGED} from './actionTypes';
 
 const initialState = {
   status: 'all',
-  color: [],
+  colors: [],
 };
 
 export default function reducer(state = initialState, action) {
@@ -12,11 +12,11 @@ export default function reducer(state = initialState, action) {
     case COLOR_CHANGED:
       switch (action.payload.changeType) {
         case 'add':
-          return {...state, color: [...state.color, action.payload.color]};
+          return {...state, colors: [...state.colors, action.payload.color]};
         case 'remove':
           return {
             ...state,
-            color: state.color.filter((c) => c !== action.payload.color),
+            colors: state.colors.filter((c) => c !== action.payload.color),
           };
         default:
           return state;
